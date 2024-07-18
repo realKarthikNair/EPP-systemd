@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 SERVICE_FILE="default-energy-performance-preference.service"
 CPU_SCRIPT="set_cpu_performance.sh"
