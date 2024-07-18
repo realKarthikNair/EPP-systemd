@@ -18,7 +18,6 @@ Currently, it does this:
 - If plugged in, sets to `performance` if battery capacity is greater than 50, else sets to `balance_performance`.
 - If not plugged in, sets to `balance_performance` if battery capacity is greater than 50, else sets to `power`.
 
-This is still under development. Customizing the thresholds and EPP using a config file is planned (see [#3](https://github.com/realKarthikNair/EPP-systemd/issues/3)).
 
 # Dependencies
 
@@ -34,7 +33,9 @@ This is still under development. Customizing the thresholds and EPP using a conf
     cd EPP-systemd
     ```
 
-2. Run `install-and-enable.sh` after making it executable to install the service and enable it.
+2. Customize thresholds and EPP by editing `cpu_performance_config.conf` if needed. The file is self explanatory.
+
+3. Run `install-and-enable.sh` after making it executable to install the service and enable it.
 
     ```bash
     chmod +x install-and-enable.sh

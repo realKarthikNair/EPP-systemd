@@ -15,6 +15,7 @@ sudo systemctl disable "$TIMER"
 sudo rm "$SYSTEMD_DIR/$SERVICE_FILE"
 sudo rm "$SYSTEMD_DIR/$TIMER"
 sudo rm "$LOCAL_BIN_DIR/$CPU_SCRIPT"
+sudo rm "/etc/cpu_performance_config.conf"
 
 sudo systemctl daemon-reload
 
