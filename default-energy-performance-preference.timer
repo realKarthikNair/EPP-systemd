@@ -1,0 +1,12 @@
+[Unit]
+Description=Run default-energy-performance-preference.service every 1 minute
+Requires=default-energy-performance-preference.service
+
+[Timer]
+OnBootSec=10s
+OnUnitActiveSec=1min
+Unit=default-energy-performance-preference.service
+
+
+[Install]
+WantedBy=timers.target

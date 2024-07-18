@@ -1,1 +1,6 @@
-This is not fully functional yet. Check issue https://github.com/realKarthikNair/EPP-systemd/issues/1 before using. Currently it sets the scaling governor to powersave and energy performance preference to `balance_performance` (instead of the `default balance_power`) on every boot. This was necessary because my 16-xf0xxx "lagged" a bit on `balance_power`.
+Currently sets Energy Performance Preference based on charging status and battery capacity.
+
+If plugged in, sets to performance if battery capacity is greater than 50, else sets to balance_performance.
+If not plugged in, sets to balance_performance if battery capacity is greater than 50, else sets to power.
+
+More coming soon! 

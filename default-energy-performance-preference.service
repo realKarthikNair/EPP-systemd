@@ -1,11 +1,11 @@
 [Unit]
-Description=Set CPU scaling governor and energy performance preference
-Wants=multi-user.target
+Description=Set CPU scaling governor and energy performance preference based on battery status
+Wants=default-energy-performance-preference.timer
 
 [Service]
 Type=oneshot
-RemainAfterExit=yes
-ExecStart=/bin/bash -c 'echo powersave | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor && echo balance_performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference'
+RemainAfterExit=no
+ExecStart=/bin/bash /usr/local/bin/set_cpu_performance.sh
 
 [Install]
 WantedBy=multi-user.target
