@@ -8,7 +8,7 @@
 
 </details>
 
-> Currently, it only supports AMD processors and is being tested on my laptop powered by an AMD Ryzen 7 7840HS. I don't have an Intel machine to learn about `intel_pstate`. If you have an Intel machine and would like to contribute, please do so (see [#4](https://github.com/realKarthikNair/EPP-systemd/issues/4)).
+> Currently, it only supports AMD processors and is being tested on my laptop powered by an AMD Ryzen 7 7840HS that runs Fedora 40. I don't have an Intel machine to learn about `intel_pstate`. If you have an Intel machine and would like to contribute, please do so (see [#4](https://github.com/realKarthikNair/EPP-systemd/issues/4)).
 
 # EPP-systemd
 
