@@ -15,9 +15,10 @@ DISCHARGING_BELOW_THRESHOLD=$(awk -F "=" '/^below_threshold/ {print $2}' <(awk -
 DISCHARGING_ABOVE=$(awk -F "=" '/^above=/ {print $2}' <(awk -v section=Discharging '$0 ~ section {flag=1; next} flag && $1 == "" {exit} flag' $CONFIG_FILE))
 DISCHARGING_BELOW=$(awk -F "=" '/^below=/ {print $2}' <(awk -v section=Discharging '$0 ~ section {flag=1; next} flag && $1 == "" {exit} flag' $CONFIG_FILE))
 
-# Get battery status and capacity
-BATTERY_STATUS=$(cat /sys/class/power_supply/BAT1/status)
-BATTERY_CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
+# Get battery name, status and capacity
+BATTERY_NAME=$(grep "name=" "$CONFIG_FILE" | sed 's/name=//')
+BATTERY_STATUS=$(cat /sys/class/power_supply/$BATTERY_NAME/status)
+BATTERY_CAPACITY=$(cat /sys/class/power_supply/$BATTERY_NAME/capacity)
 
 # Set CPU performance based on battery status and capacity
 if [ "$BATTERY_STATUS" == "Charging" ]; then
