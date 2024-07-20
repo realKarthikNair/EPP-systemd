@@ -19,6 +19,17 @@ fi
 
 sed -i "s/^name=.*/name=$BATTERY_NAME/" $CONFIG_FILE
 
+ON_BOOT_SEC=$(grep "^OnBootSec=" $CONFIG_FILE | cut -d '=' -f 2)
+ON_UNIT_ACTIVE_SEC=$(grep "^OnUnitActiveSec=" $CONFIG_FILE | cut -d '=' -f 2)
+
+if [ -n "$ON_BOOT_SEC" ] && [ -n "$ON_UNIT_ACTIVE_SEC" ]; then
+    sed -i "s/^OnBootSec=.*/OnBootSec=$ON_BOOT_SEC/" $TIMER
+    sed -i "s/^OnUnitActiveSec=.*/OnUnitActiveSec=$ON_UNIT_ACTIVE_SEC/" $TIMER
+else
+    echo "Error: OnBootSec and/or OnUnitActiveSec not found in the configuration file."
+    exit 1
+fi
+
 if [ ! -f "$SERVICE_FILE" ]; then
   echo "Error: $SERVICE_FILE not found in the current directory."
   exit 1
@@ -34,14 +45,16 @@ if [ ! -f "$TIMER" ]; then
   exit 1
 fi
 
+echo "Copying files to the required directories..."
 sudo cp "$SERVICE_FILE" "$SYSTEMD_DIR"
 sudo cp "$CPU_SCRIPT" "/usr/local/bin"
 sudo cp "$TIMER" "$SYSTEMD_DIR"
 sudo cp "$CONFIG_FILE" "/etc"
+echo "Files copied successfully."
+echo "Reloading systemd and enabling the service..."
 sudo systemctl daemon-reload
 sudo systemctl enable "$TIMER"
 sudo systemctl start "$TIMER"
 sudo systemctl enable "$SERVICE_FILE"
 sudo systemctl start "$SERVICE_FILE"
-
-echo "Service has been enabled and started."
+echo "$SERVICE_FILE service has been enabled and started."
