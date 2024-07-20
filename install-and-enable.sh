@@ -1,5 +1,10 @@
 #!/usr/bin/bash
 
+if [ ! -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver ] || [ "$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver)" != "amd-pstate-epp" ]; then
+    echo "Error: This script is only for AMD processors with the amd_pstate_epp driver supported and enabled."
+    exit 1
+fi
+
 SERVICE_FILE="default-energy-performance-preference.service"
 CPU_SCRIPT="set_cpu_performance.sh"
 TIMER="default-energy-performance-preference.timer"
